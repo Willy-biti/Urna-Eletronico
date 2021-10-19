@@ -7,6 +7,7 @@ let numeros = document.querySelector('.d-1-3');
 
 
 let etapaAtual = 0;
+let numero = '';
 
 function comecarEtapa(){
 
@@ -15,7 +16,12 @@ function comecarEtapa(){
     let numeroHTML = '';
  
     for(let i=0;i<etapa.numeros; i++){
+        if(i === 0 ){
+                numeroHTML += ' <div class="numero pisca"></div>';
+            } else{
+        
         numeroHTML += '<div class="numero"></div>';
+        }
     }
 
     seuVotoPar.style.display = 'none';
@@ -27,8 +33,35 @@ function comecarEtapa(){
 }
 
 
+function atualizaInterfac(){
+    let etapa = etapas[etapaAtual];
+    let candidatos = etapa.candidato.filter((item)=>{
+        if(item.numero === numero){
+            return true;
+        } else{
+            return false
+        }
+    })
+
+    console.log("condidato", conadidato);
+    // PATEREI AQUI...
+}
+
 function clicou(n){
-    alert('clicou em' + n);
+    {
+        let elNumero = document.querySelector('.numero.pisca');
+        if(elNumero !== null){
+            elNumero.innerHTML = n;
+            numero = '${numero}${n}';
+
+            elNumero.classList.remove('pisca');
+            if(elNumero.nextElementSibling !== null){
+            elNumero.nextElementSibling.classList.add('pisca');
+            } else{
+                atualizaInterfac();
+            }
+        }
+    }
 }
 
 function branco(){
